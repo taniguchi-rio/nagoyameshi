@@ -23,24 +23,20 @@ class AuthenticationTest extends TestCase
 
     public function test_admins_can_authenticate_using_the_login_screen(): void
     {
-        // これでCSRFチェックを無効にする
-        $this->withoutMiddleware();
-        
          // Create an Admin
         $admin = Admin::factory()->create([
-            'name' => 'Test Admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('nagoyameshi'),
         ]);
 
         // Login Request
-        $response = $this->post('/login', [
+        $response = $this->post('/admin/login', [
             'email' => 'admin@example.com',
             'password' => 'nagoyameshi',
         ]);
 
-        $this->assertAuthenticated();
-        $response->assertRedirect('/home'); // 期待するホームページに設定
+        $this->assertAuthenticated('/admin');
+        $response->assertRedirect('/admin/home'); // 期待するホームページに設定
 
         // Adjust the login route and response as per your applicatio
 
