@@ -35,7 +35,7 @@ class AuthenticationTest extends TestCase
             'password' => 'nagoyameshi',
         ]);
 
-        $this->assertAuthenticated('/admin');
+        $this->assertAuthenticated('admin');
         $response->assertRedirect('/admin/home'); // 期待するホームページに設定
 
         // Adjust the login route and response as per your applicatio
